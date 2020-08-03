@@ -4,6 +4,7 @@ const hbs = require('hbs')
 const { dirname } = require('path')
 const geocode = require('./utils/geocode')
 const forecast = require('./utils/forecast')
+const { env } = require('process')
 
 //define paths for Express config
 const publicDirPath = path.join(__dirname,'../public')
@@ -11,6 +12,8 @@ const viewsPath = path.join(__dirname, '../templates/views')
 const partialsPath = path.join(__dirname, '../templates/partials')
 
 const app = express()
+
+const port = process.env.PORT || 3000
 
 app.set('view engine','hbs') // use handlebar as view engine
 app.set('views', viewsPath) // set the path to custom view folder
@@ -91,6 +94,6 @@ app.get('*', (req, res) => {
     })
 })
 
-app.listen(3000, () =>{
-    console.log('Server running on PORT 3000')
+app.listen(port, () =>{
+    console.log('Server running on PORT: '+port)
 })
